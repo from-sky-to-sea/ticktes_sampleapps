@@ -4,20 +4,22 @@
 <!-- ページタイトル -->
 <% @page_title = '稼働中公演一覧' %>
 
-  <table class="table table-striped">
-    <thead>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>公演名称</th>
+      <th>受付期間</th>
+      <th>発券元</th>
+      <th>座席数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
       <tr>
-        <th>公演名称</th>
-        <th>発券元</th>
-        <th>座席数</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @events.each do |event| %>
-        <tr>
-          <td><%= event.basename %></td>
-          <td><%= event.agencies %></td>
+        <td><%= link_to event.basename, event %></td>
+        <td><%= event.startdate.strftime("%Y/%m/%d %H:%M") %> - <%= event.enddate.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= event.agencies %></td>
         <td><%= event.availability %></td>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>

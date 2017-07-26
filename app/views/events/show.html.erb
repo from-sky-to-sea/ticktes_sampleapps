@@ -1,0 +1,68 @@
+<h2><%= @event.basename %>の受付状況</h2>
+
+<!-- ページタイトル -->
+<% @page_title = @event.basename + '| 受付状況' %>
+
+<!-- イベント情報 -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>公演名称</th>
+      <th>受付期間</th>
+      <th>発券元</th>
+      <th>座席数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @event.basename %></td>
+      <td><%= @event.startdate.strftime("%Y/%m/%d %H:%M") %> - <%= @event.enddate.strftime("%Y/%m/%d %H:%M") %></td>
+      <td><%= @event.agencies %></td>
+      <td><%= @event.availability %></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 予約情報 -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>発券会社</th>
+      <th>受付名称</th>
+      <th>受注日</th>
+      <th>注文詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |book| %>
+      <tr>
+        <td><%= book.ticketagency_id %></td>
+        <td><%= book.booking_displayname %></td>
+        <td><%= book.created_at.strftime("%Y/%m/%d %H:%M")  %></td>
+        <td><%= book.detail %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+t.integer  "event_id"
+t.integer  "ticketagency_id"
+t.string   "booking_displayname"
+t.string   "condition"
+t.string   "detail"
+t.datetime "created_at",          null: false
+t.datetime "updated_at",          null: false
+<!--
+
+■依頼事項
+・モック作るまでならいくらか　→　★プロトタイプ（8/25にできるできない、費用・期間、、）
+　
+稼動中公演一覧
+　受付名称、受付期間、PG名称
+講演受付情報登録
+　公演名称、受付名称、受付開始日、受付終了日、発券元（ぴあ、、、、）
+受付状況照会
+　報告日/時間、
+ログイン
+-->

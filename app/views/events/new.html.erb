@@ -1,0 +1,43 @@
+
+<!-- ページタイトル -->
+<% @page_title = '公演登録' %>
+
+<%= form_for(@event) do |f| %>
+
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :basename, '公演名' %>
+    <%= f.text_field :basename, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :startdate, '受付開始日' %>
+    <%= f.text_field :startdate, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :enddate, '受注終了日' %>
+    <%= f.text_field :enddate, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :agencies, '発券元' %>
+    <%= f.text_field :agencies, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :availability, '座席数' %>
+    <%= f.text_field :availability, class: 'form-control' %>
+  </div>
+
+  <%= f.submit '投稿', class: 'btn btn-primary' %>
+<% end %>
